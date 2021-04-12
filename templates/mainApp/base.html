@@ -20,16 +20,20 @@
 <nav>
     <div class="bottom_nav" id="bottom_nav">
         <ul>
-            <li><a  href="{% url 'home' %}" class="active"><abbr title="Home"><i class="fa fa-home" aria-hidden="true"></i></abbr></a></li>
+            <li><a href="{% url 'home' %}" class="active"><abbr title="Home"><i class="fa fa-home" aria-hidden="true"></i></abbr></a></li>
 
-            <li><a href="{% url 'home' %}"><abbr title="Search"><i class="fa fa-search" aria-hidden="true" onclick="search()" ></i></abbr></a></li>
+            <li><a href="{% url 'home' %}"><abbr title="Search"><i class="fa fa-search" aria-hidden="true" onclick="search()"></i></abbr></a></li>
 
-            <li><a href="{% url 'home' %}"><abbr title="profile"><img class="menu" src="{% static 'mainApp/img/default.jpg' %}"></abbr></a></li>
+            <li><a href="{% url 'home' %}"><abbr title="profile"><img class="menu" src="{% static 'mainApp/img/default.png' %}"></abbr></a></li>
+            {% if request.user.is_authenticated %}
+            <li><a href="#"><abbr title="Notification"><i class="fa fa-sign-bell" aria-hidden="true"></i></abbr></a></li>
 
-            <li><a  href="{% url 'home' %}"><abbr title="Log In"><i class="fa fa-sign-in" aria-hidden="true"></i></abbr></a></li>
+            <li><a href="{% url 'logout' %}"><abbr title="Logout"><i class="fa fa-sign-out" aria-hidden="true"></i></abbr></a></li>
+            {% else %}
+            <li><a href="{% url 'login' %}"><abbr title="Log In"><i class="fa fa-sign-in" aria-hidden="true"></i></abbr></a></li>
 
-            <li><a href="{% url 'home' %}"><abbr title="Sign Up"><i class="fa fa-user-plus" aria-hidden="true"></i></abbr></a></li>
-
+            <li><a href="{% url 'signup' %}"><abbr title="Sign Up"><i class="fa fa-user-plus" aria-hidden="true"></i></abbr></a></li>
+            {% endif %}
         </ul>
     </div>
 </nav>

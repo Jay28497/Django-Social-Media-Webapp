@@ -1,0 +1,30 @@
+{% extends 'mainApp/base.html'%}
+
+{% load crispy_forms_tags %}
+{% load static %}
+
+
+{% block main_head %}
+<link href="{% static 'mainApp/css/style.css' %}" rel="stylesheet">
+{% endblock main_head %}
+
+
+{% block main_body %}
+<form action="#" method="POST" class="mx-auto">
+    {% csrf_token %}
+
+    <div class="image">
+        <img src="{% static 'mainApp/img/image.png' %}" alt="Avatar" class="avatar">
+    </div>
+
+    <h4 class="text-center">Register Now</h4>
+    <hr>
+
+    {{ form|crispy }}
+
+    <div class="container">
+        <input class="btn mainbtn" type="submit" value="Sign Up" />
+        <span class="float-right text-muted">Already have an account?<a href="{% url 'login' %}" class="text-dark"> Login</a></span>
+    </div>
+</form>
+{% endblock main_body %}

@@ -383,3 +383,23 @@ label:focus,
     -webkit-appearance:none;
     box-shadow: none !important;
 }
+
+
+/* Login and Signup */
+
+form {
+    width: 45%;
+}
+
+.image {
+  text-align: center;
+  margin: 24px 0 12px 0;
+}
+
+img.avatar {
+  width: 80%;
+}
+
+.container {
+  padding: 16px;
+}
