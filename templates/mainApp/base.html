@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Social Media Application</title>
+    <link href="{% static 'mainApp/css/font-awesome/css/font-awesome.min.css' %}" rel="stylesheet">
+    <link href="{% static 'mainApp/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'mainApp/css/style.css' %}" rel="stylesheet">
+    <script type="text/javascript" src="{% static 'mainApp/js/jquery-3.5.1.min.js' %}"></script>
+
+    {% block main_head %}
+
+    {% endblock main_head %}
+</head>
+<body>
+
+<nav>
+    <div class="bottom_nav" id="bottom_nav">
+        <ul>
+            <li><a  href="{% url 'home' %}" class="active"><abbr title="Home"><i class="fa fa-home" aria-hidden="true"></i></abbr></a></li>
+
+            <li><a href="{% url 'home' %}"><abbr title="Search"><i class="fa fa-search" aria-hidden="true" onclick="search()" ></i></abbr></a></li>
+
+            <li><a href="{% url 'home' %}"><abbr title="profile"><img class="menu" src="{% static 'mainApp/img/default.jpg' %}"></abbr></a></li>
+
+            <li><a  href="{% url 'home' %}"><abbr title="Log In"><i class="fa fa-sign-in" aria-hidden="true"></i></abbr></a></li>
+
+            <li><a href="{% url 'home' %}"><abbr title="Sign Up"><i class="fa fa-user-plus" aria-hidden="true"></i></abbr></a></li>
+
+        </ul>
+    </div>
+</nav>
+
+<main class="container">
+    {% block main_body %}
+
+    {% endblock main_body %}
+</main>
+
+<script type="text/javascript" src="{% static 'mainApp/js/main.js' %}"></script>
+
+</body>
+</html>

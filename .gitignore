@@ -1,0 +1,28 @@
+### Django ###
+*.log
+*.pot
+*.pyc
+__pycache__/
+local_settings.py
+#db.sqlite3
+media/
+.idea/
+.git/
+
+# IPython
+profile_default/
+ipython_config.py
+
+# PEP 582; used by e.g. github.com/David-OConnor/pyflow
+__pypackages__/
+
+# Celery stuff
+celerybeat-schedule
+celerybeat.pid
+
+# Environments
+venv/
+
+#Django-administor
+#admin
+#djangoadmin
