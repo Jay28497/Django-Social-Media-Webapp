@@ -10,7 +10,7 @@
 
 
 {% block main_body %}
-<form action="#" method="POST" class="mx-auto">
+<form method="POST" class="mx-auto">
     {% csrf_token %}
 
     <div class="image">
@@ -22,7 +22,7 @@
 
     {% if messages %}
         {% for msg in messages %}
-         <div class="alert alert-success" role="alert">
+         <div class="alert alert-{{msg.tags}}" role="alert">
             {{ msg }}
          </div>
         {% endfor %}
@@ -30,10 +30,10 @@
 
     {{ form|crispy }}
 
-    <span> <a href="#" class="text-dark"> Forgotten Password?</a></span>
+    <span> <a href="{% url 'password_reset' %}" class="text-dark"> Forgotten Password?</a></span>
 
     <div class="container">
-        <input class="btn mainbtn" type="submit" value="Login"/>
+        <input class="btn mainbtn btn-lg" type="submit" value="Login"/>
         <span class="float-right text-muted">Don't have an account? <a href="{% url 'signup' %}" class="text-dark"> Sign Up</a></span>
     </div>
 </form>

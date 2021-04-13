@@ -10,7 +10,41 @@
 
 
 {% block main_body %}
-<form action="#" method="POST" class="mx-auto">
+{% if otp %}
+<form method="POST" class="mx-auto">
+    {% csrf_token %}
+
+    <img src="{% static 'mainApp/img/otp.png' %}" alt="otp" width="65%">
+
+    <h4 class="text-center">Verify Your Email</h4>
+    <hr>
+
+    {% if messages %}
+    {% for msg in messages %}
+    <div class="alert alert-{{msg.tags}}" role="alert">
+        {{ msg }}
+    </div>
+    {% endfor %}
+    {% endif %}
+
+    <input type="hidden" name="user" value="{{ user.username }}">
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+            <span class="input-group-text" id="basic-addon1">OTP</span>
+        </div>
+        <input type="text" class="form-control" placeholder="Enter Your OTP" aria-label="OTP" aria-describedby="basic-addon1" name="otp">
+    </div>
+
+    <div class="container">
+        <input class="btn mainbtn btn-lg" type="submit" value="Verify" />
+        <span class="float-right text-muted">
+            <a href="#" class="text-dark" onclick="ReSendOTP('{{ user.username }}', 'resendOTP')">
+                <i id="resendOTP">Resend </i>OTP</a>
+        </span>
+    </div>
+</form>
+{% else %}
+<form method="POST" class="mx-auto">
     {% csrf_token %}
 
     <div class="image">
@@ -23,8 +57,9 @@
     {{ form|crispy }}
 
     <div class="container">
-        <input class="btn mainbtn" type="submit" value="Sign Up" />
+        <input class="btn mainbtn btn-lg" type="submit" value="Sign Up" />
         <span class="float-right text-muted">Already have an account?<a href="{% url 'login' %}" class="text-dark"> Login</a></span>
     </div>
 </form>
+{% endif %}
 {% endblock main_body %}

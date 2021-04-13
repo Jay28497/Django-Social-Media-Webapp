@@ -6,10 +6,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Social Media Application</title>
+
     <link href="{% static 'mainApp/css/font-awesome/css/font-awesome.min.css' %}" rel="stylesheet">
     <link href="{% static 'mainApp/css/bootstrap.min.css' %}" rel="stylesheet">
     <link href="{% static 'mainApp/css/style.css' %}" rel="stylesheet">
-    <script type="text/javascript" src="{% static 'mainApp/js/jquery-3.5.1.min.js' %}"></script>
+
+    <!--  jQuery  -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    <script type="text/javascript" src="{% static 'mainApp/js/ajax.js' %}"></script>
+    <script type="text/javascript" src="{% static 'mainApp/js/main.js' %}"></script>
 
     {% block main_head %}
 
@@ -44,7 +50,7 @@
     {% endblock main_body %}
 </main>
 
-<script type="text/javascript" src="{% static 'mainApp/js/main.js' %}"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
 
 </body>
 </html>
