@@ -7,6 +7,8 @@ from .models import UserOTP
 from django.core.mail import send_mail
 from django.conf import settings
 from django.http import HttpResponse
+from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth import authenticate, login
 
 
 def signup(request):
@@ -85,3 +87,61 @@ def resend_otp(request):
 
             return HttpResponse("Resend ")
     return HttpResponse("Can't send ")
+
+
+def login_view(request):
+    if request.user.is_authenticated:
+        return redirect('home')
+    if request.method == 'POST':
+        get_otp = request.POST.get('otp')  # 213243 #None
+
+        if get_otp:
+            get_user = request.POST.get('user')
+            user = User.objects.get(username=get_user)
+            if int(get_otp) == UserOTP.objects.filter(user=user).last().otp:
+                user.is_active = True
+                user.save()
+                login(request, user)
+                return redirect('home')
+            else:
+                messages.warning(request, f'You Entered a Wrong OTP')
+                return render(request, 'user/login.html', {'otp': True, 'user': user})
+
+        username = request.POST['username']
+        passwd = request.POST['password']
+
+        user = authenticate(request, username=username, password=passwd)
+        if user is not None:
+            login(request, user)
+            return redirect('home')
+        elif not User.objects.filter(username=username).exists():
+            messages.warning(request,
+                             f"Please enter a correct username and password. Note that both fields may be "
+                             f"case-sensitive.")
+            return redirect('login')
+        elif not User.objects.get(username=username).is_active:
+            user = User.objects.get(username=username)
+
+            # OTP generate
+            user_otp = random.randint(100000, 999999)
+            UserOTP.objects.create(user=user, otp=user_otp)
+
+            mess = f"Hello {user.first_name}, \nYour OTP is {user_otp} \nThanks !!"
+
+            # Email subject and body
+            send_mail(
+                "Welcome to Social Media Website - Verify Your Email",
+                mess,
+                settings.EMAIL_HOST_USER,
+                [user.email],
+                fail_silently=False
+            )
+            return render(request, 'user/login.html', {'otp': True, 'user': user})
+        else:
+            messages.warning(request,
+                             f"Please enter a correct username and password. Note that both fields may be "
+                             f"case-sensitive.")
+            return redirect('login')
+
+    form = AuthenticationForm()
+    return render(request, 'user/login.html', {'form': form})
