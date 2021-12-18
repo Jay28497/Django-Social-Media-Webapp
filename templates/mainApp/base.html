@@ -28,11 +28,24 @@
         <ul>
             <li><a href="{% url 'home' %}" class="active"><abbr title="Home"><i class="fa fa-home" aria-hidden="true"></i></abbr></a></li>
 
-            <li><a href="{% url 'home' %}"><abbr title="Search"><i class="fa fa-search" aria-hidden="true" onclick="search()"></i></abbr></a></li>
+            <li><a href="{% url 'search' %}"><abbr title="Search"><i class="fa fa-search" aria-hidden="true" onclick="search()"></i></abbr></a></li>
 
-            <li><a href="{% url 'home' %}"><abbr title="profile"><img class="menu" src="{% static 'mainApp/img/default.png' %}"></abbr></a></li>
             {% if request.user.is_authenticated %}
-            <li><a href="#"><abbr title="Notification"><i class="fa fa-bell" aria-hidden="true"></i></abbr></a></li>
+            <li><a href="{% url 'profile' request.user.username %}"><abbr title="profile"><img class="menu" src="{{ request.user.profile.profile_pic.url }}"></abbr></a></li>
+
+            <li><a href="#"
+                   onclick="showNotifications()"
+                   data-container="body"
+                   data-toggle="popover"
+                   data-placement="top"
+                   data-container="body"
+                   title="Notifications <a href='#' class='float-right pl-1'><small id='clear_notifications'>Clear</small></a>"
+                   data-html="true"
+                   data-content="<div id = 'notifications'>please wait ...</div>"
+                >
+                <abbr title="Notification"><i class="fa fa-bell" aria-hidden="true"></i></abbr>
+                </a>
+            </li>
 
             <li><a href="{% url 'logout' %}"><abbr title="Logout"><i class="fa fa-sign-out" aria-hidden="true"></i></abbr></a></li>
             {% else %}
@@ -45,12 +58,23 @@
 </nav>
 
 <main class="container">
+    {% if messages %}
+    {% for mess in messages %}
+    <div class="alert alert-{{mess.tags}}" role="alert">
+        {{mess}}
+    </div>
+    {% endfor %}
+    {% endif %}
+
     {% block main_body %}
 
     {% endblock main_body %}
 </main>
 
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+
+<script type="text/javascript" src="{% static 'main/js/bootstrap.min.js' %}"></script>
+<script type="text/javascript" src = "{% static 'main/js/notifications.js' %}"></script>
 
 </body>
 </html>

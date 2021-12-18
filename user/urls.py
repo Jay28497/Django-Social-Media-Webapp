@@ -20,4 +20,11 @@ urlpatterns = [
          PasswordResetCompleteView.as_view(template_name='user/password_reset_complete.html'),
          name="password_reset_complete"),
     path('resendOTP/', views.resend_otp),
+    path('followers', views.followers),
+    path('following', views.following),
+    path('notifications', views.notifications),
+    path('notifications/clear', views.clear_notifications),
+    path('islogin', views.islogin),
+    path('<str:username>', views.profile, name='profile'),
+    path('change/<str:fieldname>', views.ChangeIntoProfile),
 ]
