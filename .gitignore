@@ -26,3 +26,7 @@ venv/
 #Django-administor
 #admin
 #djangoadmin
+
+# Email credentials
+#EMAIL_HOST_USER = 'jaykanjariya28@gmail.com'
+#EMAIL_HOST_PASSWORD = 'nueufepfrslgdven'
