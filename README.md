@@ -22,6 +22,24 @@ Social media is a collective term for websites and applications that focus on co
 
   * People use social media to stay in touch and interact with friends, family and various communities.
 
+## Project View
+  
+  1. Home Page
+  
+  <img src="static/mainApp/img/home_page.png" height="550px" width="700px">
+  
+  2. SignUp Page
+  
+  <img src="static/mainApp/img/signup_page.png" height="550px" width="700px">
+  
+  3. Login Page
+  
+  <img src="static/mainApp/img/login_page.png" height="350px" width="700px">
+  
+  4. Profile Page
+  
+  <img src="static/mainApp/img/profile_page.png" height="550px" width="700px">
+
 ## Technical Features
 
   ### `Models`
@@ -41,6 +59,8 @@ Social media is a collective term for websites and applications that focus on co
   ### `Session Handling`
   
   ### `csrf_token`
+  
+  ### `Django Query`
   
   ### `Template Language`
   
